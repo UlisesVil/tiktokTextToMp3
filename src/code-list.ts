@@ -1,0 +1,82 @@
+
+export const englishCodesList=[
+    {name:'Game On',voiceCode:'en_male_jomboy'},
+    {name:'Jessie',voiceCode:'en_us_002'},
+    {name:'Wacky',voiceCode:'en_male_funny'},
+    {name:'Scream',voiceCode:'en_us_ghostface'},
+    {name:'Empathetic',voiceCode:'en_female_samc'},
+    {name:'Serious',voiceCode:'en_male_cody'},
+    {name:'Beauty Guru',voiceCode:'en_female_makeup'},
+    {name:'Bestie',voiceCode:'en_female_richgirl'},
+    {name:'Trickster',voiceCode:'en_male_grinch'},
+    {name:'Joey',voiceCode:'en_us_006'},
+    {name:'Story Teller',voiceCode:'en_male_narration'},
+    {name:'Mr. GoodGuy',voiceCode:'en_male_deadpool'},
+    {name:'Narrator',voiceCode:'en_uk_001'},
+    {name:'Male English UK',voiceCode:'en_uk_003'},
+    {name:'Metro',voiceCode:'en_au_001'},
+    {name:'Alfred',voiceCode:'en_male_jarvis'},
+    {name:'ashmagic',voiceCode:'en_male_ashmagic'},
+    {name:'olantekkers',voiceCode:'en_male_olantekkers'},
+    {name:'Lord Cringe',voiceCode:'en_male_ukneighbor'},
+    {name:'Mr. Meticulous',voiceCode:'en_male_ukbutler'},
+    {name:'Debutante',voiceCode:'en_female_shenna'},
+    {name:'Varsity',voiceCode:'en_female_pansino'},
+    {name:'Marty',voiceCode:'en_male_trevor'},
+    {name:'Pop Lullaby',voiceCode:'en_female_f08_twinkle'},
+    {name:'Classic Electric',voiceCode:'en_male_m03_classical'},
+    {name:'Bae',voiceCode:'en_female_betty'},
+    {name:'Cupid',voiceCode:'en_male_cupid'},
+    {name:'Granny',voiceCode:'en_female_grandma'},
+    {name:'Cozy',voiceCode:'en_male_m2_xhxs_m03_christmas'},
+    {name:'Author',voiceCode:'en_male_santa_narration'},
+    {name:'Caroler',voiceCode:'en_male_sing_deep_jingle'},
+    {name:'Santa',voiceCode:'en_male_santa_effect'},
+    {name:'NYE 2023',voiceCode:'en_female_ht_f08_newyear'},
+    {name:'Magician',voiceCode:'en_male_wizard'},
+    {name:'Opera',voiceCode:'en_female_ht_f08_halloween'},
+    {name:'Euphoric',voiceCode:'en_female_ht_f08_glorious'},
+    {name:'Hypetrain',voiceCode:'en_male_sing_funny_it_goes_up'},
+    {name:'Melodrama',voiceCode:'en_female_ht_f08_wonderful_world'},
+    {name:'Quirky Time',voiceCode:'en_male_m2_xhxs_m03_silly'},
+    {name:'Peaceful',voiceCode:'en_female_emotional'},
+    {name:'Toon Beat',voiceCode:'en_male_m03_sunshine_soon'},
+    {name:'Open Mic',voiceCode:'en_female_f08_warmy_breeze'},
+    {name:'Jingle',voiceCode:'en_male_m03_lobby'},
+    {name:'Thanksgiving',voiceCode:'en_male_sing_funny_thanksgiving'},
+    {name:'Cottagecore',voiceCode:'en_female_f08_salut_damour'},
+    {name:'Professor',voiceCode:'en_us_007'},
+    {name:'Scientist',voiceCode:'en_us_009'},
+    {name:'Confidence',voiceCode:'en_us_010'},
+    {name:'Smooth',voiceCode:'en_au_002'},
+    {name:'Ghost Face',voiceCode:'en_us_ghostface'},
+    {name:'Chewbacca',voiceCode:'en_us_chewbacca'},
+    {name:'C3PO',voiceCode:'en_us_c3po'},
+    {name:'Stitch',voiceCode:'en_us_stitch'},
+    {name:'Stormtrooper',voiceCode:'en_us_stormtrooper'},
+    {name:'Rocket',voiceCode:'en_us_rocket'},
+    {name:'Madame Leota',voiceCode:'en_female_madam_leota'},
+    {name:'Ghost Host',voiceCode:'en_male_ghosthost'},
+    {name:'Pirate',voiceCode:'en_male_pirate'},
+    {name:'Other Alto',voiceCode:'en_female_f08_salut_damour'},
+    {name:'Tenor',voiceCode:'en_male_m03_lobby'},
+    {name:'Sunshine Soon',voiceCode:'en_male_m03_sunshine_soon'},
+    {name:'Warmy Breeze',voiceCode:'en_female_f08_warmy_breeze'},
+    {name:'Glorious',voiceCode:'en_female_ht_f08_glorious'},
+    {name:'It Goes Up',voiceCode:'en_male_sing_funny_it_goes_up'},
+    {name:'Chipmunk',voiceCode:'en_male_m2_xhxs_m03_silly'},
+    {name:'Dramatic',voiceCode:'en_female_ht_f08_wonderful_world'},
+];
+
+
+export const spanishCodesList=[
+    {name:'Spanish (Spain) - Male',voiceCode:'es_002'}, //ok
+    {name:'Spanish MX - Male2',voiceCode:'es_mx_002'}, //ok
+    {name:'Spanish MX - Male3',voiceCode:"es_male_m3"}, //ok
+    {name:'Spanish MX - Female1',voiceCode:"es_female_fp1"}, //ok
+    {name:'Spanish MX - Female2',voiceCode:'es_female_f6'}, //ok
+    {name:'Spanish MX - Female3',voiceCode:"es_mx_female_supermom"},//ok
+    // {name:'Spanish MX - MaleTransformer',voiceCode:"es_mx_male_transformer"},
+];
+
+// module.exports =  {englishCodesList, spanishCodesList};

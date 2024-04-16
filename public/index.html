@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="mainContainer">
+        <section class="tiktokSessionId">
+            <label for="tiktokSessionIdText" class="title">Tiktok Id Session</label>
+            <input type="text" class="inputText" name="tiktokSessionIdText" id="tiktokSessionId" required autocomplete="off">
+        </section>
+
+        <section class="audioGeneratorContainer">
+            <section class="englishSection">
+                <form action="" id="englishTiktokVoiceForm">
+                    <label for="englishVoiceOptions" class="title">English Voice</label>
+                    <select class="inputSelect" name="englishVoiceOptions" id="englishVoiceOptions">
+                    </select>
+                    <input type="text" class="inputText" name="text" id="englishTextLine" required autocomplete="off">
+                    <div class="buttonsContainer">
+                        <button type="button" class="buttonPlus" id="addEnglishLine"> Agregar <span> + </span> </button>
+                        <input type="submit" class="submit" id="englishSubmit" value="Generar Audio">
+                    </div>
+                    <ul id="englishList" class="englishList"></ul>
+                    <input type="button" class="submit" id="sendEnglishList" value="Enviar lista" style="display: none;">
+                </form>
+            </section>
+
+
+            <section class="spanishSection">
+                <form action="" id="spanishTiktokVoiceForm">
+                    <label for="spanishVoiceOptions" class="title">Spanish Voice</label>
+                    <select class="inputSelect" name="spanishVoiceOptions" id="spanishVoiceOptions">
+                    </select>
+                    <input type="text" class="inputText" name="text" id="spanishTextLine" required autocomplete="off">
+                    <div class="buttonsContainer">
+                        <button type="button" class="buttonPlus" id="addSpanishLine"> Agregar <span> + </span> </button>
+                        <input type="submit" class="submit" id="spanishSubmit" value="Generar Audio">
+                    </div>
+                    <ul id="spanishList" class="spanishList"></ul>
+                    <input type="button" class="submit" id="sendSpanishList" value="Enviar lista" style="display: none;">
+                </form>
+            </section>
+        </section>
+
+        <section class="downloadSection">
+            <h3 for="tiktokSessionIdText" class="title">Downloads</h3>
+            <ul id="generatedAudiosList" class="generatedAudiosList"></ul>
+        </section>
+
+    </div>
+
+    <script src="./services/tiktok-audio-service.js"></script>
+    <script src="./tiktok-audio-voices.js"></script>
+</body>
+</html>
