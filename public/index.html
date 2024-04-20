@@ -3,56 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>TikTok text to mp3 Generator</title>
     <link rel="stylesheet" href="./style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link 
+        rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer" 
+    />
+    <script defer src="./appFunctions.js"></script>
 </head>
 <body>
 
-    <div class="mainContainer">
-        <section class="tiktokSessionId">
-            <label for="tiktokSessionIdText" class="title">Tiktok Id Session</label>
-            <input type="text" class="inputText" name="tiktokSessionIdText" id="tiktokSessionId" required autocomplete="off">
-        </section>
+    <div class="warningContainer" id="warningContainer" >
+        <div id="warning" class="warning">
+        </div>
+    </div>
 
-        <section class="audioGeneratorContainer">
-            <section class="englishSection">
-                <form action="" id="englishTiktokVoiceForm">
-                    <label for="englishVoiceOptions" class="title">English Voice</label>
-                    <select class="inputSelect" name="englishVoiceOptions" id="englishVoiceOptions">
-                    </select>
-                    <input type="text" class="inputText" name="text" id="englishTextLine" required autocomplete="off">
-                    <div class="buttonsContainer">
-                        <button type="button" class="buttonPlus" id="addEnglishLine"> Agregar <span> + </span> </button>
-                        <input type="submit" class="submit" id="englishSubmit" value="Generar Audio">
-                    </div>
-                    <ul id="englishList" class="englishList"></ul>
-                    <input type="button" class="submit" id="sendEnglishList" value="Enviar lista" style="display: none;">
-                </form>
+    <!-- Instructions For WEB App Side Bar:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+    <div id="showInstructions">
+        <p> Session Id? <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+    </div>
+    <aside id="hideInstructions">
+        <div class="titleContainer">
+            <h3 class="title">Como Obtengo el Session Id?</h3>
+            <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        </div>
+        <ul>
+            <li>Inicia sesion en tu cuenta de TikTok Web</li>
+            <li>Da click derecho en cualquier parte en la pagina</li>
+            <li>Da click en la opcion Inspeccionar o Inspeccionar Elemento</li>
+            <img src="./assets/images/01.png" class="instructionImg" alt="">
+            <li>Busca el menu Application</li>
+            <img src="./assets/images/02.png" class="instructionImg" alt="">
+            <li>busca la lista desplegable Cookies en la seccion Storage</li>
+            <li>despliega la lista Cookies y da click en https://www.tiktok.com</li>
+            <img src="./assets/images/03.png" class="instructionImg" alt="">
+            <li>En la columna Name busca el elemento sessionid</li>
+            <img src="./assets/images/04.png" class="instructionImg" alt="">
+            <li>Copia su valor y pegalo en en campo de texto en la sección Tiktok Session Id</li>
+            <img src="./assets/images/05.png" class="instructionImg" alt="">
+        </ul>
+    </aside>
+    <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+
+    <!-- TOP BAR For Electron App:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+    <!-- <div class="topBar">
+        <div class="titleBar">
+            <button id="showHideMenus" class="toggleButton"><i class="fa fa-bars" aria-hidden="true"></i></button>
+            <button class="toggleButton"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
+            <div class="title">
+                Tiktok Text to MP3
+            </div>
+        </div>
+        <div class="titleBarBtns">
+            <button id="minimizeBtn" class="topBtn minimizeBtn" title="Minimize"><i class="fa fa-window-minimize" aria-hidden="true"></i></button>
+            <button id="maxResBtn" class="topBtn maximizeBtn" title="Maximize"><i class="fa fa-window-restore" aria-hidden="true"></i></button>
+            <button id="closeBtn" class="topBtn closeBtn" title="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        </div>
+    </div> -->
+    <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+    <div class="contentArea">
+        <!-- Instructions For Electron App Side Bar:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+        <!-- <div id="mySideBar" class="leftMenu">
+                <div class="titleContainer">
+                    <h3 class="title">Como Obtengo el Session Id?</h3>
+                </div>
+                <ul>
+                    <li>Inicia sesion en tu cuenta de TikTok Web</li>
+                    <li>Da click derecho en cualquier parte en la pagina</li>
+                    <li>Da click en la opcion Inspeccionar o Inspeccionar Elemento</li>
+                    <img src="./assets/images/01.png" class="instructionImg" alt="">
+                    <li>Busca el menu Application</li>
+                    <img src="./assets/images/02.png" class="instructionImg" alt="">
+                    <li>busca la lista desplegable Cookies en la seccion Storage</li>
+                    <li>despliega la lista Cookies y da click en https://www.tiktok.com</li>
+                    <img src="./assets/images/03.png" class="instructionImg" alt="">
+                    <li>En la columna Name busca el elemento sessionid</li>
+                    <img src="./assets/images/04.png" class="instructionImg" alt="">
+                    <li>Copia su valor y pegalo en en campo de texto en la sección Tiktok Session Id</li>
+                    <img src="./assets/images/05.png" class="instructionImg" alt="">
+                </ul>
+            </div> -->
+        <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
+
+        <div class="mainContainer">
+            <section class="tiktokSessionId">
+                <label for="tiktokSessionIdText" class="title">Tiktok Session Id</label>
+                <input type="text" class="inputText" name="tiktokSessionIdText" id="tiktokSessionId" required autocomplete="off">
             </section>
 
+            <section class="audioGeneratorContainer">
+                <section class="englishSection">
+                    <form action="" id="englishTiktokVoiceForm">
+                        <label for="englishVoiceOptions" class="title">English Voice</label>
+                        <select class="inputSelect" name="englishVoiceOptions" id="englishVoiceOptions">
+                        </select>
+                        <input type="text" class="inputText" name="text" id="englishTextLine" required autocomplete="off">
+                        <div class="buttonsContainer">
+                            <button type="button" class="buttonPlus" id="addEnglishLine"> Agregar <span> + </span> </button>
+                            <input type="submit" class="submit" id="englishSubmit" value="Generar Audio">
+                        </div>
+                        <ul id="englishList" class="englishList"></ul>
+                        <input type="button" class="submit" id="sendEnglishList" value="Enviar lista" style="display: none;">
+                    </form>
+                </section>
 
-            <section class="spanishSection">
-                <form action="" id="spanishTiktokVoiceForm">
-                    <label for="spanishVoiceOptions" class="title">Spanish Voice</label>
-                    <select class="inputSelect" name="spanishVoiceOptions" id="spanishVoiceOptions">
-                    </select>
-                    <input type="text" class="inputText" name="text" id="spanishTextLine" required autocomplete="off">
-                    <div class="buttonsContainer">
-                        <button type="button" class="buttonPlus" id="addSpanishLine"> Agregar <span> + </span> </button>
-                        <input type="submit" class="submit" id="spanishSubmit" value="Generar Audio">
-                    </div>
-                    <ul id="spanishList" class="spanishList"></ul>
-                    <input type="button" class="submit" id="sendSpanishList" value="Enviar lista" style="display: none;">
-                </form>
+                <section class="spanishSection">
+                    <form action="" id="spanishTiktokVoiceForm">
+                        <label for="spanishVoiceOptions" class="title">Spanish Voice</label>
+                        <select class="inputSelect" name="spanishVoiceOptions" id="spanishVoiceOptions">
+                        </select>
+                        <input type="text" class="inputText" name="text" id="spanishTextLine" required autocomplete="off">
+                        <div class="buttonsContainer">
+                            <button type="button" class="buttonPlus" id="addSpanishLine"> Agregar <span> + </span> </button>
+                            <input type="submit" class="submit" id="spanishSubmit" value="Generar Audio">
+                        </div>
+                        <ul id="spanishList" class="spanishList"></ul>
+                        <input type="button" class="submit" id="sendSpanishList" value="Enviar lista" style="display: none;">
+                    </form>
+                </section>
             </section>
-        </section>
 
-        <section class="downloadSection">
-            <h3 for="tiktokSessionIdText" class="title">Downloads</h3>
-            <ul id="generatedAudiosList" class="generatedAudiosList"></ul>
-        </section>
-
+            <section class="downloadSection">
+                <h3 class="title">Downloads</h3>
+                <ul id="generatedAudiosList" class="generatedAudiosList"></ul>
+            </section>
+        </div>
     </div>
 
     <script src="./services/tiktok-audio-service.js"></script>

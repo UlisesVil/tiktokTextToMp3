@@ -70,13 +70,11 @@ export const englishCodesList=[
 
 
 export const spanishCodesList=[
-    {name:'Spanish (Spain) - Male',voiceCode:'es_002'}, //ok
-    {name:'Spanish MX - Male2',voiceCode:'es_mx_002'}, //ok
-    {name:'Spanish MX - Male3',voiceCode:"es_male_m3"}, //ok
-    {name:'Spanish MX - Female1',voiceCode:"es_female_fp1"}, //ok
-    {name:'Spanish MX - Female2',voiceCode:'es_female_f6'}, //ok
-    {name:'Spanish MX - Female3',voiceCode:"es_mx_female_supermom"},//ok
+    {name:'Spanish (Spain) - Male',voiceCode:'es_002'},
+    {name:'Spanish MX - Male2',voiceCode:'es_mx_002'},
+    {name:'Spanish MX - Male3',voiceCode:"es_male_m3"},
+    {name:'Spanish MX - Female1',voiceCode:"es_female_fp1"},
+    {name:'Spanish MX - Female2',voiceCode:'es_female_f6'},
+    {name:'Spanish MX - Female3',voiceCode:"es_mx_female_supermom"},
     // {name:'Spanish MX - MaleTransformer',voiceCode:"es_mx_male_transformer"},
 ];
-
-// module.exports =  {englishCodesList, spanishCodesList};

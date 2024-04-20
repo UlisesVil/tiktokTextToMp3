@@ -1,18 +1,25 @@
 {
   "name": "03tiktoktypescript",
+  "productName":"TikTok text to mp3 Generator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "start": "tsc && node dist/app.js",
-    "start:dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/app.js\""
+    "start:dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/app.js\"",
+    "start:e": "electron dist/app.js",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . tikTok-text-to-mp3-generator --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"TikTok text to mp3 Generator\"",    
+    "package-linux": "electron-packager . tikTok-text-to-mp3-generator --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.17",
+    "@types/electron": "^1.6.10",
     "@types/express": "^4.17.21",
     "@types/morgan": "^1.9.9",
     "concurrently": "^8.2.2",
@@ -21,7 +28,8 @@
     "typescript": "^5.4.4"
   },
   "dependencies": {
-    "cors": "^2.8.5",
+    "electron": "^30.0.0",
+    "electron-packager": "^17.1.2",
     "express": "^4.19.2",
     "morgan": "^1.10.0",
     "tiktok-tts": "^1.1.16"

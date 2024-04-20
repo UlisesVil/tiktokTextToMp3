@@ -1,3 +1,6 @@
+# Electron release-build directories
+release-builds/
+
 # Logs
 logs
 *.log
