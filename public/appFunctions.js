@@ -1,4 +1,4 @@
-import { ipcRenderer } from 'electron';
+const {ipcRenderer} = require('electron');
 const maxResBtn = document.getElementById('maxResBtn');
 const mySideBar = document.getElementById('mySideBar');
 const ipc = ipcRenderer;

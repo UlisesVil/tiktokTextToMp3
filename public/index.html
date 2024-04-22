@@ -50,10 +50,10 @@
 
 
     <!-- TOP BAR For Electron App:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
-    <!-- <div class="topBar">
+    <div class="topBar">
         <div class="titleBar">
             <button id="showHideMenus" class="toggleButton"><i class="fa fa-bars" aria-hidden="true"></i></button>
-            <button class="toggleButton"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
+            <button class="volume-up"><i class="fa fa-volume-up" aria-hidden="true"></i></button>
             <div class="title">
                 Tiktok Text to MP3
             </div>
@@ -63,7 +63,7 @@
             <button id="maxResBtn" class="topBtn maximizeBtn" title="Maximize"><i class="fa fa-window-restore" aria-hidden="true"></i></button>
             <button id="closeBtn" class="topBtn closeBtn" title="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
-    </div> -->
+    </div>
     <!-- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: -->
 
     <div class="contentArea">
@@ -128,8 +128,11 @@
                 </section>
             </section>
 
-            <section class="downloadSection">
-                <h3 class="title">Downloads</h3>
+            <section id="downloadSection" class="downloadSection">
+                <div class="downloadHeader">
+                    <h3 class="title">Downloads</h3>
+                    <img id="imageDnldReady" class="imageDnldReady" src="./assets/images/cuphead.gif" alt="">
+                </div>
                 <ul id="generatedAudiosList" class="generatedAudiosList"></ul>
             </section>
         </div>

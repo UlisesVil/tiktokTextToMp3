@@ -51,7 +51,7 @@ export class AudioGeneratorController{
         try {
             let audiosSaved=[];
             for (let i = 0; i < audiosData.length; i++) {
-                let audioName = '0'+(i+1);
+                let audioName = 'Audio from text 0'+(i+1);
                 let audioPath = path.join(dirPathAudios, audioName)
                 this.tiktokAudio(sessionId, audiosData[i].textToAudio, audioPath, audiosData[i].voiceCode)
                 audiosSaved.push({'fileName': audioName+'.mp3'});

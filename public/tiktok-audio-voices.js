@@ -16,19 +16,32 @@ const sendEnglishList = document.getElementById('sendEnglishList');
 var audioGeneratedElements="";
 //Create Lists::::::::::::::
 const maxItems = 10;
-const maxItemsMessage=`<p>Solo puedes agregar un maximo de ${maxItems} textos a la lista</p>`
+const maxItemsMessage=`<p>Llegaste al maximo de textos que puedes agregar, solo esta permitido un maximo de ${maxItems} textos en la lista</p>`
 //Forms::::::::::::::::::::::
 const englishTiktokVoiceForm = document.getElementById('englishTiktokVoiceForm');
 const spanishTiktokVoiceForm = document.getElementById('spanishTiktokVoiceForm');
-
+//Downloads Section::::::::::
+const downloadSection = document.getElementById('downloadSection');
+const imageDnldReady = document.getElementById('imageDnldReady');
 //Wanings::::::::::::::::::::
 //Electron Aplication
-// const sessionIdWarnMessage=`<p>Debes introducir tu Session Id de TikTok, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono de menú <i class="fa fa-bars" aria-hidden="true"></i></p>`;
-//const sessionIdIncorrect= `<p>El audio no fue generado correctamente verifica que tu TikTok Session Id sea el correcto, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono de menú <i class="fa fa-bars" aria-hidden="true"></i></p>`;
-
+// const sessionIdWarnMessage=`<div class="paragraphContainer">
+//                                 <p>Debes introducir tu Session Id de TikTok, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono de menú <i class="fa fa-bars" aria-hidden="true"></i></p>
+//                                 <p>O verifica que sea correcto debe tener 32 caracteres de longitud</p>
+//                                 <p>Si tiene la longitud correcta y tus audios no fueron generados, verifica que no haya cambiado ya que tiene caducidad, de ser asi cierra y vuelve a abrir la aplicacion e introduce el nuevo Session Id</p>
+//                             </div>`;
+// const sessionIdIncorrect = `<div class="paragraphContainer">
+//                                 <p>El audio no fue generado correctamente verifica que tu TikTok Session Id sea el correcto, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono de menú <i class="fa fa-bars" aria-hidden="true"></i></p>
+//                             </div>`;
 //Web Aplication
-const sessionIdWarnMessage=`<p>Debes introducir tu Session Id de TikTok, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono flecha derecha <i class="fa fa-arrow-right" aria-hidden="true"></i></p>`;
-const sessionIdIncorrect= `<p>El audio no fue generado correctamente verifica que tu TikTok Session Id sea el correcto, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono flecha derecha <i class="fa fa-arrow-right" aria-hidden="true"></i></p>`;
+const sessionIdWarnMessage =`<div class="paragraphContainer">
+                                <p>Debes introducir tu Session Id de TikTok, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono flecha derecha <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+                                <p>O verifica que sea correcto debe tener 32 caracteres de longitud</p>
+                                <p>Si tiene la longitud correcta y tus audios no fueron generados, verifica que no haya cambiado ya que tiene caducidad, de ser asi cierra y vuelve a abrir la aplicacion e introduce el nuevo Session Id</p>
+                            </div>`;
+const sessionIdIncorrect = `<div class="paragraphContainer">
+                                <p>El audio no fue generado correctamente verifica que tu TikTok Session Id sea el correcto, puedes ver como obtenerlo en la parte superior izquierda de la aplicación, dale click en el icono flecha derecha <i class="fa fa-arrow-right" aria-hidden="true"></i></p>
+                            </div>`;
 
 window.addEventListener('load', async()=>{
     const tiktokSessionIdStoraged = localStorage.getItem('tiktokSessionId');
@@ -64,8 +77,7 @@ window.addEventListener('load', async()=>{
 //Submit Spanish Element:::::::::::::::::::::::::::
 spanishTiktokVoiceForm.addEventListener('submit', async e =>{
     e.preventDefault();
-    let tiktokSessionId = document.getElementById('tiktokSessionId').value;
-    if (tiktokSessionId==='') {
+    if (inputSessionId.value==='' || inputSessionId.value.length!==32) {
         sessionIdWarn(sessionIdWarnMessage);
     }else{
         let spanishOptionSelectedName = document.getElementById('spanishVoiceOptions');
@@ -74,14 +86,20 @@ spanishTiktokVoiceForm.addEventListener('submit', async e =>{
 
         let spanishOptionSelectedCode = document.getElementById('spanishVoiceOptions').value;
         let textToAudio = document.getElementById('spanishTextLine').value;
-        localStorage.setItem('tiktokSessionId', tiktokSessionId);
+        localStorage.setItem('tiktokSessionId', inputSessionId.value);
 
         let spanishToAudio = [{'voiceCode':spanishOptionSelectedCode, 'textToAudio':textToAudio, 'voiceName':optionNameSelected}]
 
-        let audioObject={'sessionId':tiktokSessionId, 'audiosData':spanishToAudio}
+        let audioObject={'sessionId':inputSessionId.value, 'audiosData':spanishToAudio}
         let tiktokPostService= new TikTokAudioRequests();
         let generatedAudios = await tiktokPostService.generateAudio(audioObject);
         if (generatedAudios) {
+            downloadSection.style='display: flex; background-color: rgba(255, 0, 76, 0.459)';
+            imageDnldReady.style='display:block';
+            imageDnldReady.src='./assets/images/mugman.gif';
+            setTimeout(() => {
+                imageDnldReady.style='display:none';
+            }, 3000);
             audioGeneratedList(generatedAudios.data);
         }
     }
@@ -90,9 +108,10 @@ spanishTiktokVoiceForm.addEventListener('submit', async e =>{
 //Submit English Element:::::::::::::::::::::::::::
 englishTiktokVoiceForm.addEventListener('submit', async e =>{
     e.preventDefault();
-    let tiktokSessionId = document.getElementById('tiktokSessionId').value;
-    if (tiktokSessionId==='') {
+    if (inputSessionId.value==='' || inputSessionId.value.length!==32) {
         sessionIdWarn(sessionIdWarnMessage);
+        console.log(inputSessionId.value);
+        console.log(inputSessionId.value.length,  inputSessionId.value.length!==32);
     }else{
         let englishOptionSelectedName = document.getElementById('englishVoiceOptions');
         let selectedIndex = englishOptionSelectedName.selectedIndex;
@@ -100,14 +119,20 @@ englishTiktokVoiceForm.addEventListener('submit', async e =>{
 
         let englishOptionSelectedCode = document.getElementById('englishVoiceOptions').value;
         let textToAudio = document.getElementById('englishTextLine').value;
-        localStorage.setItem('tiktokSessionId', tiktokSessionId);
+        localStorage.setItem('tiktokSessionId', inputSessionId.value);
 
         let englishToAudio = [{'voiceCode':englishOptionSelectedCode, 'textToAudio':textToAudio, 'voiceName':optionNameSelected}]
 
-        let audioObject={'sessionId':tiktokSessionId, 'audiosData':englishToAudio}
+        let audioObject={'sessionId':inputSessionId.value, 'audiosData':englishToAudio}
         let tiktokPostService= new TikTokAudioRequests();
         let generatedAudios = await tiktokPostService.generateAudio(audioObject);
         if (generatedAudios) {
+            downloadSection.style='display: flex; background-color: rgba(0, 85, 105, 0.459)';
+            imageDnldReady.style='display:block';
+            imageDnldReady.src='./assets/images/cuphead.gif';
+            setTimeout(() => {
+                imageDnldReady.style='display:none';
+            }, 3000);
             audioGeneratedList(generatedAudios.data);
         }
     }
@@ -120,13 +145,15 @@ addSpanishLineButton.addEventListener('click', (e)=>{
     let optionNameSelected = spanishOptionSelectedName.options[selectedIndex].text
     let spanishOptionSelectedCode = document.getElementById('spanishVoiceOptions').value;
     let textToAudio = document.getElementById('spanishTextLine').value;
-    listOfSpanishText.push(
-        {
-            'voiceName':optionNameSelected,
-            'voiceCode':spanishOptionSelectedCode, 
-            'textToAudio':textToAudio,
-        }
-    );
+    if(listOfSpanishText.length < maxItems){
+        listOfSpanishText.push(
+            {
+                'voiceName':optionNameSelected,
+                'voiceCode':spanishOptionSelectedCode, 
+                'textToAudio':textToAudio,
+            }
+        );
+    }
     if (listOfSpanishText.length > 0 && listOfSpanishText.length <= maxItems) {
         sendSpanishList.style.display = 'block';
         spanishListElements='';
@@ -135,7 +162,7 @@ addSpanishLineButton.addEventListener('click', (e)=>{
         }
         spanishList.innerHTML=spanishListElements;
     }
-    if(listOfSpanishText.length > maxItems){
+    if(listOfSpanishText.length === maxItems){
         sessionIdWarn(maxItemsMessage);
     }
 });
@@ -146,13 +173,16 @@ addEnglishLineButton.addEventListener('click', (e)=>{
     let optionNameSelected = englishOptionSelectedName.options[selectedIndex].text
     let englishOptionSelectedCode = document.getElementById('englishVoiceOptions').value;
     let textToAudio = document.getElementById('englishTextLine').value;
-    listOfEnglishText.push(
-        {
-            'voiceCode':englishOptionSelectedCode, 
-            'textToAudio':textToAudio,
-            'voiceName':optionNameSelected,
-        }
-    );
+
+    if(listOfEnglishText.length < maxItems){
+        listOfEnglishText.push(
+            {
+                'voiceCode':englishOptionSelectedCode, 
+                'textToAudio':textToAudio,
+                'voiceName':optionNameSelected,
+            }
+        );
+    }
     if (listOfEnglishText.length>0 && listOfEnglishText.length <= maxItems) {
         sendEnglishList.style.display = 'block';
         englishListElements='';
@@ -161,20 +191,26 @@ addEnglishLineButton.addEventListener('click', (e)=>{
         }
         englishList.innerHTML=englishListElements;
     }
-    if(listOfEnglishText.length > maxItems){
+    if(listOfEnglishText.length === maxItems){
         sessionIdWarn(maxItemsMessage);
     }
 });
 
 //Send Spanish list to get Audios
 sendSpanishList.addEventListener('click', async ()=>{
-    if (inputSessionId.value==='') {
+    if (inputSessionId.value==='' || inputSessionId.value.length!==32) {
         sessionIdWarn(sessionIdWarnMessage);
     }else{
         let audioObject={'sessionId':inputSessionId.value, 'audiosData':listOfSpanishText};
         let tiktokPostService= new TikTokAudioRequests();
         let generatedAudios = await tiktokPostService.generateAudio(audioObject);
         if (generatedAudios) {
+            downloadSection.style='display: flex; background-color: rgba(255, 0, 76, 0.459)';
+            imageDnldReady.style='display:block';
+            imageDnldReady.src='./assets/images/mugman.gif';
+            setTimeout(() => {
+                imageDnldReady.style='display:none';
+            }, 3000);
             audioGeneratedList(generatedAudios.data);
         }
     }
@@ -182,13 +218,19 @@ sendSpanishList.addEventListener('click', async ()=>{
 
 //Send English list to get Audios
 sendEnglishList.addEventListener('click', async ()=>{
-    if (inputSessionId.value==='') {
+    if (inputSessionId.value==='' || inputSessionId.value.length!==32) {
         sessionIdWarn(sessionIdWarnMessage);
     }else{
         let audioObject={'sessionId':inputSessionId.value, 'audiosData':listOfEnglishText};
         let tiktokPostService= new TikTokAudioRequests();
         let generatedAudios = await tiktokPostService.generateAudio(audioObject);
         if (generatedAudios) {
+            downloadSection.style='display: flex; background-color: rgba(0, 85, 105, 0.459)';
+            imageDnldReady.style='display:block';
+            imageDnldReady.src='./assets/images/cuphead.gif';
+            setTimeout(() => {
+                imageDnldReady.style='display:none';
+            }, 3000);
             audioGeneratedList(generatedAudios.data);
         }
     }
@@ -225,7 +267,7 @@ function audioGeneratedList(responseData){
     let audiogeneratedList = document.getElementById('generatedAudiosList');
     audioGeneratedElements='';
     for (let i = 0; i < responseData.length; i++) {
-        audioGeneratedElements += `<li class="downloadListElement"> <span>Archivo: </span> ${responseData[i].fileName}<i class="fa fa-download downloadElement" aria-hidden="true" onclick="downloadElement('${responseData[i].fileName}')" alt="Descargar"></i></li>`
+        audioGeneratedElements += `<li class="downloadListElement"> <span>Audiofile <i class="fa fa-volume-up" aria-hidden="true"></i> : </span> ${responseData[i].fileName}<i class="fa fa-download downloadElement" aria-hidden="true" onclick="downloadElement('${responseData[i].fileName}')" alt="Descargar"></i></li>`
     }
     audiogeneratedList.innerHTML=audioGeneratedElements
 }
@@ -243,7 +285,7 @@ async function downloadElement (fileName){
     link.click();
 }
 
-
+//Web App Only:::::::::::::::::::::::::::::::::::::::::::
 //How to get Session Id Instructions Menu
 const hideInstructions = document.getElementById('hideInstructions');
 const showInstructions = document.getElementById('showInstructions');
